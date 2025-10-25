@@ -1,8 +1,34 @@
+# GitHub Actions Workflow for Database Testing
+# 
+# This workflow automatically runs whenever anyone pushes code to test the database connection.
+# It's set up to run on everyone's personal dev branches AND the main production branch.
+#
+# Branches:
+# - maria, emma, fatimah, malek, mona: Personal development branches (one per team member)
+# - main: Production branch (where we merge tested code)
+#
+# What it does:
+# 1. Sets up Python environment
+# 2. Installs our dependencies (pymysql, boto3)
+# 3. Connects to AWS using secrets (never exposes credentials)
+# 4. Runs our database setup script to test the connection
+# 5. Shows results in the Actions tab so we know if it worked
+#
+# Check the Actions tab on GitHub after pushing to see if your code passes!
+
 name: Database Deploy
 
 on:
   push:
-    branches: [ maria ] # MAKE SURE TO UPDATE THE NAME OF YOUR BRANCH HERE. 
+    branches: 
+      - maria        # Your branch
+      - emma         # Emma's branch
+      - fatimah      # Fatimah's branch
+      - malek        # Malek's branch
+      - mona         # Mona's branch
+      - main         # Main production branch
+  pull_request:
+    branches: [ main ]
 
 jobs:
   deploy:
