@@ -1,0 +1,45 @@
+Tables so far: Jobs, Users, and Files
+
+FIELDS FOR JOBS:
+Id (Generated on the backend, i.e. JOBS1 JOBS2, etc.)\
+Name (Ex. Bob Willis - Business Cards)
+Created Date/Time
+Last Modified Date/Time
+Last Modified By
+Additional Customization (255 char limit)
+Additional Comments (255 char limit)
+Files
+Customer Name
+Email
+Phone
+Billing Address (Street, zipcode, unit, state, city)
+Shipping Address  (Street, zipcode, unit, state, city)
+Cost
+Job Type
+Quantity
+Material
+
+Future for jobs: check for duplicate jobs -> inform user if there is one and if they are sure about proceeding
+
+
+FIELDS FOR USERS:
+Id
+Name
+Created Date
+Last Modified Date/Time
+Jobs
+Password
+Username
+Email
+Phone
+
+
+
+FIELDS FOR FILES:
+File Name
+Category
+Original?
+File Link
+Created Date/Time
+Last Modified Date/Time
+Last Modified By
