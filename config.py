@@ -27,7 +27,7 @@ def get_db_config():
             'host': secret['host'],
             'user': secret['username'],  # Note: converting 'username' to 'user'
             'password': secret['password'],
-            'database': secret.get('dbname', 'printosdatabase'),  # Default to 'printosdatabase' if not set
+            'database': secret.get('dbname', 'printosdb'),  # changed printosdabase to printosdb
             'port': int(secret.get('port', 3306))  # MySQL default port is 3306
         }
     except ClientError as e:
