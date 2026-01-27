@@ -5,7 +5,7 @@ from botocore.exceptions import ClientError
 def get_db_config():
  
     # This is where our DB password lives in AWS
-    secret_name = "printos/db/credentials"
+    secret_name = "rds!db-cfd13dcd-efdd-4db4-a2bc-c3008793f5c0"
     region_name = "us-east-2"
     
     try:
