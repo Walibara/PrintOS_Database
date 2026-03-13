@@ -10,5 +10,5 @@ CREATE TABLE IF NOT EXISTS files (
     last_modified_by VARCHAR(50),
     PRIMARY KEY (file_name),
     CONSTRAINT fk_files_last_modified_by
-        FOREIGN KEY (last_modified_by) REFERENCES users(id)
+
 );
