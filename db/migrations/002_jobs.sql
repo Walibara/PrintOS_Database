@@ -36,16 +36,21 @@ CREATE TABLE IF NOT EXISTS jobs (
   id BIGINT AUTO_INCREMENT PRIMARY KEY,-- job number
 
   job_type VARCHAR(100) NOT NULL,
-  quantity INT NOT NULL,
-  material VARCHAR(100),
+  name VARCHAR(255) NOT NULL,
 
-  original_file VARCHAR(500), -- this will eventually have a path to a S3 bucket where we gonna keep the file
+
+  files VARCHAR(500), -- this will eventually have a path to a S3 bucket where we gonna keep the file
   file_type VARCHAR(50),
 
-  additional_customization VARCHAR(255),
-  additional_comments VARCHAR(255),
 
-  cost DECIMAL(10,2), -- I feel we need to add something here to use un billing later
+  -- which worker currently own this job
+  additional_comments VARCHAR(255),
+  current_worker_id VARCHAR(50) NULL,
+  last_heartbeat_at TIMESTAMP NULL,
+  retry_count INT NOT NULL DEFAULT 0,
+  max_retries INT NOT NULL DEFAULT 3,
+
+
 
   status VARCHAR(50) NOT NULL,-- backend sets: CREATED/FAILED/PROCESSING/etc.
 
