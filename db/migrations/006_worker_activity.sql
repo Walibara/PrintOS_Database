@@ -1,7 +1,7 @@
 -- Worker Activity Audit table
 CREATE TABLE IF NOT EXISTS worker_activity (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    job_id VARCHAR(50) NOT NULL,
+    job_id BIGINT NOT NULL,
     worker_id VARCHAR(50) NOT NULL,
     worker_type ENUM('SUCCESS','FAILURE','TIMEOUT') NOT NULL,
     expected_behavior ENUM('SUCCESS','FAILURE','TIMEOUT') NULL,
