@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS files (
     created_datetime TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     last_modified_datetime TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
         ON UPDATE CURRENT_TIMESTAMP,
-    last_modified_by VARCHAR(50),
+    last_modified_by BIGINT,
     PRIMARY KEY (file_name),
     CONSTRAINT fk_files_last_modified_by
         FOREIGN KEY (last_modified_by) REFERENCES users(id)
