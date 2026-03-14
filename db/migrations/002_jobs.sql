@@ -58,5 +58,11 @@ CREATE TABLE IF NOT EXISTS jobs (
     ON UPDATE CURRENT_TIMESTAMP,
 
   uploaded_by_user_id BIGINT NULL,-- future FK to users(id)
-  last_updated_by VARCHAR(100) NULL -- "worker:imposition" or "user:12"
+  last_updated_by VARCHAR(100) NULL, -- "worker:imposition" or "user:12"
+
+    CONSTRAINT fk_jobs_current_worker
+    FOREIGN KEY (current_worker_id) REFERENCES workers(id),
+
+  CONSTRAINT fk_jobs_uploaded_by_user
+    FOREIGN KEY (uploaded_by_user_id) REFERENCES users(id)
 );
