@@ -36,6 +36,8 @@ CREATE TABLE IF NOT EXISTS jobs (
   id BIGINT AUTO_INCREMENT PRIMARY KEY,-- job number
 
   job_type VARCHAR(100) NOT NULL,
+  quantity INT NOT NULL, -- Added quantity back (Maria)
+  materia VARCHAR(100), -- Added material back (Maria)
   original_file (255) NOT NULL, --changed this from name (Maria)
 
 
