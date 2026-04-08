@@ -36,10 +36,10 @@ CREATE TABLE IF NOT EXISTS jobs (
   id BIGINT AUTO_INCREMENT PRIMARY KEY,-- job number
 
   job_type VARCHAR(100) NOT NULL,
-  name VARCHAR(255) NOT NULL,
+  original_file (255) NOT NULL, --changed this from name (Maria)
 
 
-  files VARCHAR(500), -- this will eventually have a path to a S3 bucket where we gonna keep the file
+  s3_key VARCHAR(500), -- canged name to s3_key (Maria)
   file_type VARCHAR(50),
 
 
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS jobs (
   last_updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     ON UPDATE CURRENT_TIMESTAMP,
 
-  uploaded_by_user_id BIGINT NULL,-- future FK to users(id)
+  uploaded_by_user_id BIGINT NOT NULL, -- changed it to be required (Maria)
   last_updated_by VARCHAR(100) NULL, -- "worker:imposition" or "user:12"
 
     CONSTRAINT fk_jobs_current_worker
