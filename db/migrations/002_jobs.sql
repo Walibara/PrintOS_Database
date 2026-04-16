@@ -31,22 +31,26 @@
 -- Thank you for your attention to this matter,
 -- Maria 1/26/26
 -- =========================================================
+-- Updating the db to get it ready for the s3 path (and adding other things) (Maria - 4/15)
 
-CREATE TABLE IF NOT EXISTS jobs (
-  id BIGINT AUTO_INCREMENT PRIMARY KEY,-- job number
+DROP TABLE IF EXISTS jobs; 
+
+CREATE TABLE jobs (
+  id BIGINT AUTO_INCREMENT PRIMARY KEY,-- internal db id (backend only) Maria 4/15
+  job_number VARCHAR(10) NOT NULL UNIQUE -- This is the job number that the client will see
 
   job_type VARCHAR(100) NOT NULL,
   quantity INT NOT NULL, -- Added quantity back (Maria)
-  materia VARCHAR(100), -- Added material back (Maria)
-  original_file (255) NOT NULL, --changed this from name (Maria)
+  material VARCHAR(100), -- Added material back (Maria)
+  original_file VARCHAR(255) NOT NULL, --changed this from name (Maria)
 
 
   s3_key VARCHAR(500), -- canged name to s3_key (Maria)
   file_type VARCHAR(50),
-
+  additional_comments VARCHAR(255),
+  cost DOUBLE,
 
   -- which worker currently own this job
-  additional_comments VARCHAR(255),
   current_worker_id VARCHAR(50) NULL,
   last_heartbeat_at TIMESTAMP NULL,
   retry_count INT NOT NULL DEFAULT 0,
