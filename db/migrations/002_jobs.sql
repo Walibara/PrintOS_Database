@@ -37,7 +37,7 @@ DROP TABLE IF EXISTS jobs;
 
 CREATE TABLE jobs (
   id BIGINT AUTO_INCREMENT PRIMARY KEY,-- internal db id (backend only) Maria 4/15
-  job_number VARCHAR(10) NOT NULL UNIQUE -- This is the job number that the client will see
+  job_number VARCHAR(10) NOT NULL UNIQUE, -- This is the job number that the client will see
 
   job_type VARCHAR(100) NOT NULL,
   quantity INT NOT NULL, -- Added quantity back (Maria)
