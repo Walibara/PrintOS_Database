@@ -69,27 +69,37 @@ def run_migrations(migrations_dir="db/migrations"):
         print("Missing migrations folder:", migrations_dir)
         return
 
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    # Creates tracking table if it doesn't exist
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS schema_migrations (
+            filename VARCHAR(255) PRIMARY KEY,
+            applied_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    """)
+    conn.commit()
+
+
+    cursor.execute("SELECT filename FROM schema_migrations")
+    applied = set(row[0] for row in cursor.fetchall())
     # 2) Get all .sql files
     files = os.listdir(migrations_dir)
 
-    # Keep only .sql
-    sql_files = []
-    for f in files:
-        if f.endswith(".sql"):
-            sql_files.append(f)
+    sql_files = sorted(f for f in os.listdir(migrations_dir) if f.endswith(".sql"))
 
-    # Sort so 001_, 002_ run in order
-    sql_files.sort()
-
-    if len(sql_files) == 0:
+    if not sql_files:
         print("No .sql files found in", migrations_dir)
         return
 
     # 3) Connect once, run all migrations, then commit once
-    conn = get_connection()
-    cursor = conn.cursor()
 
     for filename in sql_files:
+        if filename in applied:
+            print("Skipping (already applied):", filename)
+            continue
+        
         path = os.path.join(migrations_dir, filename)
         print("Running migration:", filename)
 
@@ -105,7 +115,10 @@ def run_migrations(migrations_dir="db/migrations"):
             if stmt != "":
                 cursor.execute(stmt)
 
-    conn.commit()
+        cursor.execute("INSERT INTO schema_migrations (filename) VALUES (%s)", (filename,))
+        conn.commit()
+        print("Done:", filename)
+
     cursor.close()
     conn.close()
 
