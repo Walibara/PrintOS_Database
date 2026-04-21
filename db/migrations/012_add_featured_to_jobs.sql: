@@ -1,0 +1,6 @@
+-- Migration 012: Add is_featured column to jobs table
+-- Featured jobs are submitted from the featured collection
+-- and should not appear in the user's personal library
+
+ALTER TABLE jobs
+ADD COLUMN is_featured BOOLEAN NOT NULL DEFAULT FALSE;
